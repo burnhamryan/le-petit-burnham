@@ -35,3 +35,9 @@ Built the household dinner and grocery system with Ryan, after a 7-question inte
 
 5. **`Context/people/Diana.md`**, append:
    `Has her own Claude account (Ryan, 7 November 2026), so she can be an Editor on shared artifacts such as the chalkboard menu in [[Projects/le-petit-burnham/README]].`
+
+6. **`Projects/le-petit-burnham/README.md`** (already in the vault): the repo is now on GitHub at `github.com/burnhamryan/le-petit-burnham` (private), pushed 7 November 2026.
+   - In the bottom line, drop "and the code is committed locally but not on GitHub".
+   - In the `## What exists` table, set the Code repo row to: `| Code repo | github.com/burnhamryan/le-petit-burnham, private | Pushed 7 November, 2 commits |`
+   - In `## Next steps`, tick the GitHub line: `- [x] Create the private GitHub repo and push (7 November)`
+   - Drop the closing paragraph about the code living only in the artifact.
