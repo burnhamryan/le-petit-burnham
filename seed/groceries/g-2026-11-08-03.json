@@ -1,0 +1,13 @@
+{
+  "name": "Ground pork, 1 lb",
+  "sec": "Meat & fish",
+  "store": "Walmart",
+  "forDish": "Sweet & sour pork",
+  "kind": "plan",
+  "week": "2026-11-08",
+  "night": "2026-11-11",
+  "check": false,
+  "status": "queued",
+  "addedBy": "agent",
+  "createdAt": "2026-11-07T13:23:00Z"
+}

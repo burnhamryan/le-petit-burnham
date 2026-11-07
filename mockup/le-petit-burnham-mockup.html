@@ -1,0 +1,631 @@
+<title>Le Petit Burnham</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Caveat:wght@500;700&family=Josefin+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: a framed slate chalkboard, one column of "plats du jour" with dotted
+   leaders to hands-on minutes where a price would be; Le Marché is the same
+   board turned into the grocery + pantry station. Deliberately single-theme. */
+:root {
+  --slate: #1d2522;
+  --slate-2: #242e2a;
+  --slate-3: #2d3833;
+  --chalk: #ece8dc;
+  --chalk-dim: #a9ada3;
+  --chalk-faint: rgba(236,232,220,.16);
+  --yellow: #f2d67c;
+  --pink: #f0a39b;
+  --mint: #9fd6bd;
+  --wood: #6b4a2f;
+  --wood-dark: #3f2a19;
+  --f-display: "Cabin Sketch", "Chalkboard SE", "Comic Sans MS", cursive;
+  --f-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+  --f-ui: "Josefin Sans", "Futura", "Avenir Next", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--wood-dark); }
+body {
+  background: var(--wood-dark);
+  color: var(--chalk);
+  font-family: var(--f-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.board {
+  max-width: 760px;
+  margin: 0 auto;
+  border: 10px solid var(--wood);
+  border-image: linear-gradient(135deg, #7a5536, #5a3c24 40%, #80593a 60%, #4e331f) 1;
+  box-shadow: 0 0 0 2px var(--wood-dark), inset 0 0 60px rgba(0,0,0,.55);
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.05), transparent 45%),
+    radial-gradient(ellipse at 85% 60%, rgba(255,255,255,.04), transparent 50%),
+    radial-gradient(ellipse at 40% 95%, rgba(255,255,255,.035), transparent 40%),
+    var(--slate);
+  padding: 28px clamp(16px, 5vw, 48px) 36px;
+}
+.chalk { text-shadow: 0 0 1px rgba(236,232,220,.45), 0 0 8px rgba(236,232,220,.08); }
+.mock-note {
+  max-width: 760px; margin: 0 auto 12px; font-size: 13px; color: #d9c7b2;
+  letter-spacing: .04em; text-align: center;
+}
+
+/* Masthead */
+.mast { text-align: center; display: grid; gap: 6px; }
+.eyebrow { font-family: var(--f-ui); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--chalk-dim); }
+h1 {
+  font-family: var(--f-display); font-weight: 700; margin: 0;
+  font-size: clamp(42px, 10vw, 76px); line-height: 1; color: var(--chalk);
+  text-wrap: balance;
+}
+.sub { font-family: var(--f-hand); font-size: 26px; color: var(--yellow); line-height: 1.1; }
+.flourish { height: 18px; width: 220px; margin: 6px auto 0; display: block; }
+
+/* Tabs */
+.tabs { display: flex; justify-content: center; gap: 8px; margin: 22px 0 6px; flex-wrap: wrap; }
+.tab {
+  font-family: var(--f-ui); font-weight: 600; font-size: 14px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--chalk-dim); background: none; border: 2px solid transparent; border-radius: 999px;
+  padding: 8px 18px 6px; cursor: pointer; text-decoration: none;
+}
+.tab[aria-current="page"] { color: var(--slate); background: var(--chalk); }
+.tab:hover:not([aria-current="page"]) { border-color: var(--chalk-faint); color: var(--chalk); }
+:focus-visible { outline: 2px dashed var(--yellow); outline-offset: 3px; }
+
+/* Shared section heads */
+.sec { margin-top: 34px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-bottom: 2px dashed var(--chalk-faint); padding-bottom: 6px; margin-bottom: 14px; }
+h2 { font-family: var(--f-display); font-size: 32px; margin: 0; font-weight: 700; line-height: 1.1; }
+.sec-head .hand { font-family: var(--f-hand); font-size: 21px; color: var(--chalk-dim); }
+
+/* Approval */
+.approve {
+  margin-top: 22px; display: grid; gap: 12px; padding: 16px 18px;
+  border: 2px solid var(--chalk-faint); border-radius: 6px; background: rgba(0,0,0,.14);
+}
+.approve-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.status-pill {
+  font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  padding: 5px 12px 3px; border-radius: 999px; border: 2px solid var(--yellow); color: var(--yellow);
+}
+.status-pill.ok { border-color: var(--mint); color: var(--mint); }
+.stamps { display: flex; gap: 10px; flex-wrap: wrap; }
+.stamp {
+  font-family: var(--f-hand); font-size: 24px; line-height: 1; color: var(--chalk);
+  background: none; border: 2px dashed var(--chalk-dim); border-radius: 6px; padding: 8px 14px 6px; cursor: pointer; min-width: 120px;
+}
+.stamp[aria-pressed="true"] { border-style: solid; border-color: var(--mint); color: var(--mint); transform: rotate(-3deg); }
+.approve p { margin: 0; font-size: 14px; color: var(--chalk-dim); }
+
+/* Menu */
+.nights { list-style: none; margin: 0; padding: 0; display: grid; gap: 26px; }
+.night { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 4px 16px; }
+.date { text-align: center; padding-top: 4px; }
+.date .dow { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--chalk-dim); display: block; }
+.date .dnum { font-family: var(--f-display); font-size: 34px; line-height: 1; display: block; }
+.dish-line { display: flex; align-items: baseline; gap: 8px; }
+.dish { font-family: var(--f-display); font-size: 25px; line-height: 1.15; font-weight: 700; min-width: 0; }
+.leader { flex: 1 1 24px; min-width: 18px; border-bottom: 3px dotted var(--chalk-faint); transform: translateY(-6px); }
+.mins { font-family: var(--f-hand); font-size: 26px; color: var(--yellow); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.desc { font-family: var(--f-hand); font-size: 22px; line-height: 1.2; color: var(--chalk); margin: 4px 0 0; max-width: 58ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 13px; color: var(--chalk-dim); letter-spacing: .06em; }
+.meta .heat { color: var(--pink); }
+.wish-badge {
+  display: inline-block; font-family: var(--f-hand); font-size: 20px; color: var(--slate); background: var(--yellow);
+  padding: 0 10px; border-radius: 3px; transform: rotate(-2deg); margin-bottom: 4px;
+}
+.night-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.btn {
+  font-family: var(--f-ui); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--chalk); background: transparent; border: 2px solid var(--chalk-faint); border-radius: 999px;
+  padding: 6px 14px 4px; cursor: pointer;
+}
+.btn:hover { border-color: var(--chalk-dim); }
+.btn.solid { background: var(--chalk); color: var(--slate); border-color: var(--chalk); }
+.btn.pink { border-color: rgba(240,163,155,.5); color: var(--pink); }
+.night.is-86 .dish, .night.is-86 .desc { text-decoration: line-through; text-decoration-thickness: 3px; text-decoration-color: var(--pink); opacity: .55; }
+.eighty6 { display: none; font-family: var(--f-hand); font-size: 22px; color: var(--pink); }
+.night.is-86 .eighty6 { display: block; }
+
+.swap {
+  margin-top: 12px; padding: 14px 16px; border: 2px dashed rgba(159,214,189,.5); border-radius: 6px; display: grid; gap: 10px;
+}
+.swap-head { font-family: var(--f-hand); font-size: 22px; color: var(--mint); line-height: 1.1; }
+.swap-opt { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--chalk-faint); padding-top: 10px; }
+.swap-opt .t { min-width: 0; }
+.swap-opt b { font-family: var(--f-display); font-size: 20px; display: block; line-height: 1.15; }
+.swap-opt small { font-size: 13px; color: var(--chalk-dim); }
+.swap-ask { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.night-off { text-align: center; padding: 18px 8px; border-top: 2px dashed var(--chalk-faint); border-bottom: 2px dashed var(--chalk-faint); }
+.night-off .dish { font-size: 28px; display: block; }
+.night-off .desc { margin: 4px auto 0; }
+
+/* Inputs */
+.field { display: flex; gap: 8px; flex-wrap: wrap; }
+.field input[type="text"] {
+  flex: 1 1 220px; min-width: 0; font-family: var(--f-hand); font-size: 24px; color: var(--chalk);
+  background: rgba(0,0,0,.18); border: none; border-bottom: 2px solid var(--chalk-dim); padding: 6px 4px 2px; border-radius: 0;
+}
+.field input::placeholder { color: rgba(236,232,220,.38); }
+.field input:focus-visible { outline: none; border-bottom-color: var(--yellow); }
+.field label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.lines { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+.lines li { display: flex; align-items: center; justify-content: space-between; gap: 10px 14px; padding: 10px 0; border-bottom: 1px solid var(--chalk-faint); flex-wrap: wrap; }
+.lines .t { min-width: 0; flex: 1 1 200px; }
+.lines .name { font-family: var(--f-hand); font-size: 24px; line-height: 1.1; }
+.lines .by { font-size: 13px; color: var(--chalk-dim); letter-spacing: .04em; }
+.chip {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap;
+  padding: 4px 10px 2px; border-radius: 999px; border: 1.5px solid var(--chalk-faint); color: var(--chalk-dim);
+}
+.chip.mint { border-color: rgba(159,214,189,.6); color: var(--mint); }
+.chip.yellow { border-color: rgba(242,214,124,.6); color: var(--yellow); }
+.chip.pink { border-color: rgba(240,163,155,.6); color: var(--pink); }
+
+.recent { margin-top: 14px; font-family: var(--f-hand); font-size: 21px; color: var(--chalk-dim); line-height: 1.3; }
+.recent s { text-decoration-color: var(--pink); }
+
+/* Market */
+.sync { display: flex; gap: 8px 20px; flex-wrap: wrap; justify-content: center; margin-top: 18px; font-size: 13px; color: var(--chalk-dim); letter-spacing: .05em; }
+.sync b { color: var(--mint); font-weight: 600; }
+.shop-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px 32px; }
+.group h3 { font-family: var(--f-ui); font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--yellow); margin: 0 0 4px; font-weight: 700; }
+.item { display: flex; align-items: baseline; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--chalk-faint); flex-wrap: wrap; }
+.item .name { font-family: var(--f-hand); font-size: 23px; line-height: 1.1; }
+.item .for { font-size: 13px; color: var(--chalk-dim); flex: 1 1 auto; min-width: 0; }
+.store { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--chalk-dim); border: 1.5px solid var(--chalk-faint); border-radius: 3px; padding: 2px 5px 0; }
+.item.check .name::after { content: " (check)"; font-family: var(--f-ui); font-size: 13px; color: var(--yellow); }
+.item .dupe { font-size: 12px; color: var(--mint); flex-basis: 100%; }
+.have { display: flex; gap: 6px; flex-basis: 100%; }
+.have button { font-size: 12px; padding: 3px 10px 1px; }
+.have button[aria-pressed="true"] { background: var(--chalk); color: var(--slate); }
+
+.pantry { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 18px 28px; }
+.prow { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--chalk-faint); align-items: center; }
+.prow .name { font-family: var(--f-hand); font-size: 23px; line-height: 1.05; }
+.prow .src { font-size: 12px; color: var(--chalk-dim); grid-column: 1; }
+.seg { display: inline-flex; border: 1.5px solid var(--chalk-faint); border-radius: 999px; overflow: hidden; grid-row: 1 / span 2; grid-column: 2; }
+.seg button { font-family: var(--f-ui); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: none; border: none; color: var(--chalk-dim); padding: 6px 9px 4px; cursor: pointer; }
+.seg button[aria-pressed="true"][data-v="ok"] { background: var(--mint); color: var(--slate); }
+.seg button[aria-pressed="true"][data-v="low"] { background: var(--yellow); color: var(--slate); }
+.seg button[aria-pressed="true"][data-v="out"] { background: var(--pink); color: var(--slate); }
+
+.drop {
+  display: grid; gap: 6px; place-items: center; text-align: center; padding: 22px 16px; margin-top: 4px;
+  border: 2px dashed var(--chalk-dim); border-radius: 8px; cursor: pointer;
+}
+.drop:hover, .drop:focus-within { border-color: var(--yellow); }
+.drop .big { font-family: var(--f-hand); font-size: 26px; line-height: 1.1; }
+.drop small { color: var(--chalk-dim); font-size: 13px; }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+.foot { text-align: center; margin-top: 36px; font-family: var(--f-hand); font-size: 22px; color: var(--chalk-dim); }
+
+
+/* Inline editing */
+.edit-btn {
+  font-family: var(--f-ui); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  background: none; border: none; color: var(--chalk-dim); text-decoration: underline; text-decoration-style: dotted;
+  text-underline-offset: 4px; cursor: pointer; padding: 6px 4px;
+}
+.edit-btn:hover { color: var(--yellow); }
+.edit {
+  flex-basis: 100%; display: grid; gap: 6px; padding: 14px; margin: 6px 0; border: 2px dashed var(--yellow);
+  border-radius: 6px; background: rgba(0,0,0,.22); min-width: 0;
+}
+.edit label { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--yellow); margin-top: 4px; }
+.edit input, .edit textarea, .edit select, .field select {
+  width: 100%; min-width: 0; font-family: var(--f-hand); font-size: 22px; line-height: 1.2; color: var(--chalk);
+  background: rgba(0,0,0,.2); border: none; border-bottom: 2px solid var(--chalk-dim); border-radius: 0; padding: 4px 6px 2px;
+}
+.edit textarea { resize: vertical; }
+.edit select option, .field select option { background: var(--slate); color: var(--chalk); }
+.field select { width: auto; flex: 0 1 auto; font-size: 20px; }
+.edit input:focus-visible, .edit textarea:focus-visible, .edit select:focus-visible, .field select:focus-visible { outline: none; border-bottom-color: var(--yellow); }
+.edit-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.edited { color: var(--yellow); }
+.item .edit-btn, .prow .edit-btn { padding: 2px 4px; }
+.prow .row-foot { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.add-row { margin-top: 12px; }
+
+@media (max-width: 520px) {
+  .board { border-width: 6px; padding-top: 22px; }
+  .night { grid-template-columns: 46px minmax(0,1fr); gap: 4px 12px; }
+  .date .dnum { font-size: 28px; }
+  .dish { font-size: 22px; }
+  .desc { font-size: 20px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stamp { transition: transform .2s ease, color .2s ease, border-color .2s ease; }
+}
+</style>
+
+<p class="mock-note">Mockup for Diana's sign-off. Every button works on this page, but nothing saves yet.</p>
+
+<main class="board">
+  <header class="mast">
+    <span class="eyebrow">Est. 2026 &middot; Table for four</span>
+    <h1 class="chalk">Le Petit Burnham</h1>
+    <span class="sub chalk">Plats du jour &middot; semaine du 8 novembre</span>
+    <svg class="flourish" viewBox="0 0 220 18" aria-hidden="true"><path d="M4 9 C40 2, 70 16, 110 9 S180 2, 216 9" fill="none" stroke="#ece8dc" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/><circle cx="110" cy="9" r="3" fill="#f2d67c"/></svg>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <a class="tab" href="#menu" data-view="menu">La Carte</a>
+    <a class="tab" href="#market" data-view="market">Le Marché</a>
+  </nav>
+
+  <!-- ================= MENU ================= -->
+  <section id="view-menu">
+    <div class="approve">
+      <div class="approve-top">
+        <span class="status-pill" id="status">Awaiting approval</span>
+        <div class="stamps">
+          <button class="stamp" id="stamp-ryan" aria-pressed="false">Ryan</button>
+          <button class="stamp" id="stamp-diana" aria-pressed="false">Diana</button>
+        </div>
+      </div>
+      <p id="approve-text">Either signature approves the week. On the next morning run, groceries go to the Groceries list in Reminders and dinners go on the Family calendar.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Les Plats</h2><span class="hand">hands-on minutes where the prices go</span></div>
+      <ol class="nights" id="nights"></ol>
+    </div>
+
+    <div class="sec">
+      <div class="night-off">
+        <span class="date"><span class="dow">Samedi 14</span></span>
+        <span class="dish chalk">Chef's night off</span>
+        <p class="desc">Pizza, takeout, or cereal for dinner. No judgment here.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Les Envies</h2><span class="hand">wish for it, and it's on the board within two weeks</span></div>
+      <form class="field" id="wish-form">
+        <label for="wish-input">A dish you'd like soon</label>
+        <input type="text" id="wish-input" placeholder="I'd like to have this dish soon..." autocomplete="off">
+        <button class="btn solid" type="submit">Wish it</button>
+      </form>
+      <ul class="lines" id="wishes"></ul>
+      <p class="recent">Recently served, resting until it's been two weeks: <s>Chicken shawarma pitas</s> &middot; <s>Turkey sausage pasta</s> &middot; <s>Teriyaki chicken bowls</s> &middot; <s>Smash burgers</s> &middot; <s>Air-fryer fish tacos</s></p>
+    </div>
+  </section>
+
+  <!-- ================= MARKET ================= -->
+  <section id="view-market" hidden>
+    <div class="sync">
+      <span>Last morning run: <b>today, 7:02 am</b></span>
+      <span>Reminders list: <b>Groceries</b></span>
+      <span>Next run: tomorrow, 7:00 am</span>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Snacks &amp; Specials</h2><span class="hand">goes to Reminders on the next run, no approval needed</span></div>
+      <form class="field" id="quick-form">
+        <label for="quick-input">Add a snack or special item</label>
+        <input type="text" id="quick-input" placeholder="Goldfish, birthday candles, the good chocolate..." autocomplete="off">
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+      <ul class="lines" id="specials"></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">This Week's Shop</h2><span class="hand" id="shop-note">waiting on a signature, then off to Reminders</span></div>
+      <div class="shop-groups" id="shop"></div>
+      <form class="field add-row" id="shop-form">
+        <label for="shop-input">Add to this week's shop</label>
+        <input type="text" id="shop-input" placeholder="Add to this week's shop..." autocomplete="off">
+        <label for="shop-sec">Section</label>
+        <select id="shop-sec"></select>
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Le Garde-Manger</h2><span class="hand">what's in the house, tap or edit to correct</span></div>
+      <div class="pantry" id="pantry"></div>
+      <form class="field add-row" id="pantry-form">
+        <label for="pantry-input">Something we have</label>
+        <input type="text" id="pantry-input" placeholder="Something we have..." autocomplete="off">
+        <label for="pantry-loc">Where</label>
+        <select id="pantry-loc"></select>
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Receipts</h2><span class="hand">snap it, the agent reads it tomorrow morning</span></div>
+      <label class="drop" for="receipt">
+        <input type="file" id="receipt" accept="image/*">
+        <span class="big" id="drop-text">Drop a Costco or Walmart receipt photo</span>
+        <small>Items get added to the pantry and checked off this week's shop.</small>
+      </label>
+      <ul class="lines">
+        <li><span class="t"><span class="name">Costco, Nov 1</span><br><span class="by">Uploaded by Diana &middot; 18 items added to the pantry</span></span><span class="chip mint">Read</span></li>
+        <li><span class="t"><span class="name">Walmart, Nov 3</span><br><span class="by">Uploaded by Ryan &middot; 11 items added, 1 line unreadable</span></span><span class="chip mint">Read</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="foot">Merci, et bon appétit.</p>
+</main>
+
+<script>
+const SECTIONS = ["Meat & fish", "Produce", "Dairy", "Bread", "Pantry", "Other"];
+const LOCS = ["Fridge", "Freezer", "Pantry"];
+
+const NIGHTS = [
+  { dow: "Dim", d: 8, dish: "Carnitas Tacos", mins: 30, protein: "Pork shoulder", heat: "Salsa verde on the side", wish: "Diana's wish, granted",
+    desc: "Pork shoulder pressure-braised with orange and cumin in the Instant Pot, crisped in the air fryer, piled into warm corn tortillas." },
+  { dow: "Lun", d: 9, dish: "Sesame Beef Noodles", mins: 15, protein: "Ground beef", heat: "Chili crisp on the side",
+    desc: "Lo mein tossed with browned beef, sesame, ginger and green onion. The kids' favorite slurp." },
+  { dow: "Mar", d: 10, dish: "Honey-Soy Salmon", mins: 12, protein: "Salmon", heat: "Sriracha mayo on the side", swapOpen: true,
+    desc: "Air-fried salmon with a sticky honey-soy glaze over Instant Pot jasmine rice, charred broccoli alongside." },
+  { dow: "Mer", d: 11, dish: "Beef Kofta Pitas", mins: 20, protein: "Ground beef", heat: "Harissa on the side",
+    desc: "Cumin-spiced kofta from the air fryer, warm pita, cucumber, tomato and a cool garlic yogurt." },
+  { dow: "Jeu", d: 12, dish: "Maple-Mustard Pork", mins: 15, protein: "Pork tenderloin", heat: "Mild all the way",
+    desc: "Pork tenderloin brushed with maple and Dijon, roasted with carrots until everything goes golden." },
+  { dow: "Ven", d: 13, dish: "Chicken Fried Rice", mins: 20, protein: "Chicken thighs (5)", heat: "Sriracha on the side",
+    desc: "Five crispy thighs chopped into Tuesday's leftover rice with peas, carrots and scrambled egg. Friday, sorted." },
+];
+const SWAPS = [
+  { dish: "Teriyaki Salmon Bowls", note: "Same salmon, 12 min, uses the rice already planned" },
+  { dish: "Crispy Fish Sandwiches", note: "Air-fryer cod, pantry buns, 15 min" },
+  { dish: "Chicken Yakisoba", note: "Moves chicken up, uses the low noodles first, 18 min" },
+];
+const WISHES = [
+  { dish: "Carnitas tacos", by: "Diana", chip: ["Booked: Sun, Nov 8", "mint"] },
+  { dish: "Bibimbap bowls", by: "Ryan", chip: ["Guaranteed by Nov 21", "yellow"] },
+  { dish: "Lemon chicken orzo", by: "Diana", chip: ["Guaranteed by Nov 21", "yellow"] },
+];
+const SPECIALS = [
+  { name: "Goldfish crackers", by: "Diana", chip: ["In Reminders", "mint"] },
+  { name: "Sparkling water, lime", by: "Ryan", chip: ["In Reminders", "mint"] },
+  { name: "Birthday candles", by: "Diana", chip: ["Tomorrow, 7 am", "yellow"] },
+  { name: "The good dark chocolate", by: "Ryan", chip: ["Tomorrow, 7 am", "yellow"] },
+];
+const DUPE = "Already on your Groceries list, won't add twice";
+const SHOP = [
+  { sec: "Meat & fish", name: "Pork shoulder, 3 lb", forDish: "Carnitas", store: "Costco" },
+  { sec: "Meat & fish", name: "Salmon fillets", forDish: "Salmon", store: "Costco" },
+  { sec: "Meat & fish", name: "Pork tenderloin", forDish: "Maple-mustard pork", store: "Costco", dupe: DUPE },
+  { sec: "Produce", name: "Oranges", forDish: "Carnitas", store: "Walmart" },
+  { sec: "Produce", name: "Cilantro", forDish: "Carnitas", store: "Walmart" },
+  { sec: "Produce", name: "Limes", forDish: "Carnitas", store: "Walmart" },
+  { sec: "Produce", name: "Fresh ginger", forDish: "Sesame noodles", store: "Walmart", dupe: DUPE },
+  { sec: "Produce", name: "Green onions", forDish: "Noodles, fried rice", store: "Walmart" },
+  { sec: "Produce", name: "Tomatoes", forDish: "Kofta pitas", store: "Walmart" },
+  { sec: "Produce", name: "Cucumber", forDish: "Kofta pitas", store: "Walmart", check: true },
+  { sec: "Dairy", name: "Shredded cheese", forDish: "Tacos (running low)", store: "Costco" },
+  { sec: "Dairy", name: "Greek yogurt", forDish: "Kofta pitas", store: "Costco", check: true },
+  { sec: "Bread", name: "Corn tortillas", forDish: "Carnitas", store: "Walmart" },
+  { sec: "Bread", name: "Pita", forDish: "Kofta pitas", store: "Walmart" },
+  { sec: "Pantry", name: "Lo mein noodles", forDish: "Sesame noodles (low)", store: "Walmart" },
+  { sec: "Pantry", name: "Salsa verde", forDish: "Carnitas", store: "Walmart" },
+  { sec: "Pantry", name: "Maple syrup", forDish: "Maple-mustard pork", store: "Costco", check: true },
+  { sec: "Pantry", name: "Dijon mustard", forDish: "Maple-mustard pork", store: "Walmart", check: true },
+];
+const PANTRY = [
+  { loc: "Fridge", name: "Eggs", src: "a dozen · Costco receipt, Nov 1", st: "ok" },
+  { loc: "Fridge", name: "Shredded cheese", src: "a handful left · you tapped low", st: "low" },
+  { loc: "Fridge", name: "Carrots", src: "2 lb bag · checked off, Nov 3", st: "ok" },
+  { loc: "Fridge", name: "Butter", src: "Costco receipt, Nov 1", st: "ok" },
+  { loc: "Freezer", name: "Chicken thighs", src: "5 · Costco receipt, Nov 1", st: "ok" },
+  { loc: "Freezer", name: "Ground beef", src: "2 lb · checked off, Nov 3", st: "ok" },
+  { loc: "Freezer", name: "Frozen broccoli", src: "1 bag · Walmart receipt, Nov 3", st: "ok" },
+  { loc: "Freezer", name: "Peas & carrots", src: "half a bag", st: "low" },
+  { loc: "Pantry", name: "Jasmine rice", src: "Costco bag", st: "ok" },
+  { loc: "Pantry", name: "Lo mein noodles", src: "1 pack · used Nov 4", st: "low" },
+  { loc: "Pantry", name: "Soy sauce", src: "", st: "ok" },
+  { loc: "Pantry", name: "Sesame oil", src: "", st: "low" },
+  { loc: "Pantry", name: "Pita", src: "finished with shawarma, Nov 4", st: "out" },
+];
+
+const LISTS = { nights: NIGHTS, wishes: WISHES, specials: SPECIALS, shop: SHOP, pantry: PANTRY };
+const FIELDS = {
+  nights: [
+    { k: "dish", label: "Dish" },
+    { k: "desc", label: "Menu description", type: "textarea" },
+    { k: "mins", label: "Hands-on minutes", type: "number" },
+    { k: "heat", label: "On the side" },
+  ],
+  wishes: [{ k: "dish", label: "Dish" }],
+  specials: [{ k: "name", label: "Item" }],
+  shop: [
+    { k: "name", label: "Item" },
+    { k: "forDish", label: "For" },
+    { k: "sec", label: "Section", type: "select", options: SECTIONS },
+    { k: "store", label: "Store", type: "select", options: ["Costco", "Walmart"] },
+  ],
+  pantry: [
+    { k: "name", label: "Item" },
+    { k: "src", label: "How much, or a note" },
+    { k: "loc", label: "Where", type: "select", options: LOCS },
+  ],
+};
+let editing = null; // "list:index"
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const isEditing = (list, i) => editing === `${list}:${i}`;
+const editBtn = (list, i, name) => `<button class="edit-btn" type="button" data-edit data-list="${list}" data-i="${i}" aria-label="Edit ${esc(name)}">Edit</button>`;
+
+function editForm(list, i) {
+  const item = LISTS[list][i];
+  const ctl = f => {
+    const id = `e-${list}-${i}-${f.k}`, v = item[f.k] ?? "";
+    if (f.type === "textarea") return `<textarea id="${id}" name="${f.k}" rows="3">${esc(v)}</textarea>`;
+    if (f.type === "select") return `<select id="${id}" name="${f.k}">${f.options.map(o => `<option${o === v ? " selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+    return `<input id="${id}" name="${f.k}" type="${f.type || "text"}" value="${esc(v)}" autocomplete="off"${f.type === "number" ? ' min="0" inputmode="numeric"' : ""}>`;
+  };
+  return `<form class="edit" data-list="${list}" data-i="${i}">
+    ${FIELDS[list].map(f => `<label for="e-${list}-${i}-${f.k}">${f.label}</label>${ctl(f)}`).join("")}
+    <div class="edit-actions">
+      <button class="btn solid" type="submit">Save</button>
+      <button class="btn" type="button" data-cancel>Cancel</button>
+      ${list === "nights" ? "" : `<button class="btn pink" type="button" data-remove data-list="${list}" data-i="${i}">Remove</button>`}
+    </div>
+  </form>`;
+}
+
+function renderNights() {
+  $("#nights").innerHTML = NIGHTS.map((n, i) => `
+    <li class="night${n.is86 ? " is-86" : ""}" data-i="${i}">
+      <div class="date"><span class="dow">${n.dow}</span><span class="dnum">${n.d}</span></div>
+      <div style="min-width:0">
+      ${isEditing("nights", i) ? editForm("nights", i) : `
+        ${n.wish ? `<span class="wish-badge">${esc(n.wish)}</span>` : ""}
+        <div class="dish-line"><span class="dish chalk">${esc(n.dish)}</span><span class="leader" aria-hidden="true"></span><span class="mins">${n.mins} min</span></div>
+        <p class="desc">${esc(n.desc)}</p>
+        <div class="meta"><span>${esc(n.protein)}</span><span>${n.mins} min hands-on</span><span class="heat">${esc(n.heat)}</span>${n.edited ? `<span class="edited">Edited by you</span>` : ""}</div>
+        <span class="eighty6">86'd. We're not making this one. Nothing gets subtracted from the pantry.</span>
+        <div class="night-actions">
+          <button class="btn" data-act="swap" aria-expanded="${!!n.swapOpen}">Swap</button>
+          <button class="btn" type="button" data-edit data-list="nights" data-i="${i}">Edit</button>
+          <button class="btn pink" data-act="86">${n.is86 ? "Undo 86" : "86 it"}</button>
+        </div>
+        <div class="swap" ${n.swapOpen ? "" : "hidden"}>
+          <span class="swap-head">Not feeling it? The chef suggests:</span>
+          ${SWAPS.map((s, j) => `<div class="swap-opt"><span class="t"><b>${esc(s.dish)}</b><small>${esc(s.note)}</small></span><button class="btn solid" data-act="take" data-j="${j}">Take this</button></div>`).join("")}
+          <div class="field swap-ask"><label for="ask-${i}">Ask for something specific</label><input type="text" id="ask-${i}" placeholder="Something with shrimp?" autocomplete="off"><button class="btn" type="button">Ask</button></div>
+        </div>`}
+      </div>
+    </li>`).join("");
+}
+
+function renderSimple(el, list, label, nameKey) {
+  $(el).innerHTML = LISTS[list].map((w, i) => isEditing(list, i)
+    ? `<li>${editForm(list, i)}</li>`
+    : `<li><span class="t"><span class="name">${esc(w[nameKey])}</span><br><span class="by">${label} ${esc(w.by)}${w.edited ? ` · <span class="edited">edited</span>` : ""}</span></span>
+         <span class="chip ${w.chip[1]}">${esc(w.chip[0])}</span>${editBtn(list, i, w[nameKey])}</li>`).join("");
+}
+
+function renderShop() {
+  $("#shop").innerHTML = SECTIONS.map(sec => {
+    const rows = SHOP.map((it, i) => ({ it, i })).filter(x => x.it.sec === sec);
+    if (!rows.length) return "";
+    return `<div class="group"><h3>${esc(sec)}</h3>${rows.map(({ it, i }) => isEditing("shop", i) ? editForm("shop", i) : `
+      <div class="item${it.check ? " check" : ""}">
+        <span class="name">${esc(it.name)}</span><span class="for">${it.forDish ? "for " + esc(it.forDish) : "added by you"}</span><span class="store">${esc(it.store)}</span>${editBtn("shop", i, it.name)}
+        ${it.dupe ? `<span class="dupe">${esc(it.dupe)}</span>` : ""}
+        ${it.check ? `<span class="have"><button class="btn" data-have="have" data-i="${i}" aria-pressed="${it.have === "have"}">Have it</button><button class="btn" data-have="need" data-i="${i}" aria-pressed="${it.have === "need"}">Need it</button></span>` : ""}
+      </div>`).join("")}</div>`;
+  }).join("");
+}
+
+function renderPantry() {
+  $("#pantry").innerHTML = LOCS.map(loc => {
+    const rows = PANTRY.map((it, i) => ({ it, i })).filter(x => x.it.loc === loc);
+    return `<div class="group"><h3>${esc(loc)}</h3>${rows.map(({ it, i }) => isEditing("pantry", i) ? editForm("pantry", i) : `
+      <div class="prow"><span class="name">${esc(it.name)}</span>
+        <span class="seg" role="group" aria-label="${esc(it.name)} status">${["ok", "low", "out"].map(v => `<button data-v="${v}" data-i="${i}" aria-pressed="${v === it.st}">${v === "ok" ? "Have" : v === "low" ? "Low" : "Out"}</button>`).join("")}</span>
+        <span class="row-foot"><span class="src">${esc(it.src) || "&nbsp;"}</span>${editBtn("pantry", i, it.name)}</span>
+      </div>`).join("") || `<p class="src">Nothing here yet.</p>`}</div>`;
+  }).join("");
+}
+
+function renderAll() {
+  renderNights();
+  renderSimple("#wishes", "wishes", "wished by", "dish");
+  renderSimple("#specials", "specials", "added by", "name");
+  renderShop(); renderPantry();
+  if (editing) requestAnimationFrame(() => $("form.edit input, form.edit textarea")?.focus());
+}
+
+// Editing: open, save, cancel, remove
+document.addEventListener("click", e => {
+  const ed = e.target.closest("[data-edit]");
+  if (ed) { editing = `${ed.dataset.list}:${ed.dataset.i}`; renderAll(); return; }
+  if (e.target.closest("[data-cancel]")) { editing = null; renderAll(); return; }
+  const rm = e.target.closest("[data-remove]");
+  if (rm) { LISTS[rm.dataset.list].splice(Number(rm.dataset.i), 1); editing = null; renderAll(); }
+});
+document.addEventListener("submit", e => {
+  const f = e.target.closest("form.edit"); if (!f) return;
+  e.preventDefault();
+  const list = f.dataset.list, item = LISTS[list][f.dataset.i];
+  FIELDS[list].forEach(fl => { let v = f.elements[fl.k].value.trim(); if (fl.type === "number") v = Math.max(0, Number(v) || 0); item[fl.k] = v; });
+  if (list === "shop") item.dupe = null;
+  item.edited = true; editing = null; renderAll();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && editing) { editing = null; renderAll(); } });
+
+// Menu actions
+$("#nights").addEventListener("click", e => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const li = b.closest(".night"); const n = NIGHTS[li.dataset.i];
+  if (b.dataset.act === "swap") { const p = $(".swap", li); p.hidden = !p.hidden; n.swapOpen = !p.hidden; b.setAttribute("aria-expanded", !p.hidden); }
+  if (b.dataset.act === "86") { n.is86 = !n.is86; renderNights(); }
+  if (b.dataset.act === "take") { const s = SWAPS[b.dataset.j]; n.dish = s.dish; n.desc = s.note + ". Swapped in by you, just now."; n.swapOpen = false; renderNights(); }
+});
+
+// Add forms
+$("#wish-form").addEventListener("submit", e => {
+  e.preventDefault(); const v = $("#wish-input").value.trim(); if (!v) return;
+  WISHES.push({ dish: v, by: "you", chip: ["Guaranteed by Nov 21", "yellow"] }); $("#wish-input").value = ""; renderAll();
+});
+$("#quick-form").addEventListener("submit", e => {
+  e.preventDefault(); const v = $("#quick-input").value.trim(); if (!v) return;
+  SPECIALS.unshift({ name: v, by: "you", chip: ["Tomorrow, 7 am", "yellow"] }); $("#quick-input").value = ""; renderAll();
+});
+$("#shop-sec").innerHTML = SECTIONS.map(s => `<option>${esc(s)}</option>`).join("");
+$("#shop-form").addEventListener("submit", e => {
+  e.preventDefault(); const v = $("#shop-input").value.trim(); if (!v) return;
+  SHOP.push({ sec: $("#shop-sec").value, name: v, forDish: "", store: "Walmart" }); $("#shop-input").value = ""; renderAll();
+});
+$("#pantry-loc").innerHTML = LOCS.map(s => `<option>${esc(s)}</option>`).join("");
+$("#pantry-form").addEventListener("submit", e => {
+  e.preventDefault(); const v = $("#pantry-input").value.trim(); if (!v) return;
+  PANTRY.push({ loc: $("#pantry-loc").value, name: v, src: "added by you, just now", st: "ok" }); $("#pantry-input").value = ""; renderAll();
+});
+
+// Taps
+$("#shop").addEventListener("click", e => {
+  const b = e.target.closest("[data-have]"); if (!b) return;
+  SHOP[b.dataset.i].have = b.dataset.have; renderShop();
+});
+$("#pantry").addEventListener("click", e => {
+  const b = e.target.closest(".seg button"); if (!b) return;
+  PANTRY[b.dataset.i].st = b.dataset.v; renderPantry();
+});
+$("#receipt").addEventListener("change", e => {
+  const f = e.target.files[0]; if (f) $("#drop-text").textContent = `${f.name} is queued. The agent reads it tomorrow at 7 am.`;
+});
+
+// Approval stamps
+function setStamps() {
+  const r = $("#stamp-ryan").getAttribute("aria-pressed") === "true", d = $("#stamp-diana").getAttribute("aria-pressed") === "true";
+  const st = $("#status");
+  if (r || d) {
+    st.textContent = "Approved"; st.classList.add("ok");
+    $("#approve-text").textContent = `Approved by ${[r && "Ryan", d && "Diana"].filter(Boolean).join(" and ")}. Groceries go to Reminders and dinners to the Family calendar at tomorrow's 7 am run. You can still swap or edit.`;
+    $("#shop-note").textContent = "approved, off to Reminders at 7 am";
+  } else {
+    st.textContent = "Awaiting approval"; st.classList.remove("ok");
+    $("#approve-text").textContent = "Either signature approves the week. On the next morning run, groceries go to the Groceries list in Reminders and dinners go on the Family calendar.";
+    $("#shop-note").textContent = "waiting on a signature, then off to Reminders";
+  }
+}
+document.querySelectorAll(".stamp").forEach(b => b.addEventListener("click", () => {
+  const on = b.getAttribute("aria-pressed") !== "true";
+  b.setAttribute("aria-pressed", on); b.textContent = (b.id === "stamp-ryan" ? "Ryan" : "Diana") + (on ? " ✓" : ""); setStamps();
+}));
+
+function route() {
+  const v = location.hash === "#market" ? "market" : "menu";
+  $("#view-menu").hidden = v !== "menu"; $("#view-market").hidden = v !== "market";
+  document.querySelectorAll(".tab").forEach(t => { if (t.dataset.view === v) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", route);
+renderAll(); route();
+</script>

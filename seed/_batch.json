@@ -1,0 +1,248 @@
+[
+ {
+  "op": "set",
+  "collection": "weeks",
+  "doc_id": "2026-11-08",
+  "file_path": "/home/user/bistro-agent/seed/weeks/2026-11-08.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-01",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-01.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-02",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-02.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-03",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-03.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-04",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-04.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-05",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-05.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-06",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-06.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-07",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-07.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-08",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-08.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-09",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-09.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-10",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-10.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-11",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-11.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-12",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-12.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-13",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-13.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-14",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-14.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-15",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-15.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-16",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-16.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-17",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-17.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-18",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-18.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-19",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-19.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-20",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-20.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-21",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-21.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-22",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-22.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-23",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-23.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-24",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-24.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-25",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-25.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-26",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-26.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-27",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-27.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-28",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-28.json"
+ },
+ {
+  "op": "set",
+  "collection": "groceries",
+  "doc_id": "g-2026-11-08-29",
+  "file_path": "/home/user/bistro-agent/seed/groceries/g-2026-11-08-29.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-01",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-01.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-02",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-02.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-03",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-03.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-04",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-04.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-05",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-05.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-06",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-06.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-07",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-07.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-08",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-08.json"
+ },
+ {
+  "op": "set",
+  "collection": "pantry",
+  "doc_id": "p-09",
+  "file_path": "/home/user/bistro-agent/seed/pantry/p-09.json"
+ },
+ {
+  "op": "set",
+  "collection": "history",
+  "doc_id": "2026-10-25",
+  "file_path": "/home/user/bistro-agent/seed/history/2026-10-25.json"
+ },
+ {
+  "op": "set",
+  "collection": "meta",
+  "doc_id": "sync",
+  "file_path": "/home/user/bistro-agent/seed/meta/sync.json"
+ }
+]

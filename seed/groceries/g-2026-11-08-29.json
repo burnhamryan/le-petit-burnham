@@ -1,0 +1,13 @@
+{
+  "name": "Garlic powder",
+  "sec": "Pantry",
+  "store": "Walmart",
+  "forDish": "Several dinners",
+  "kind": "plan",
+  "week": "2026-11-08",
+  "night": "2026-11-08",
+  "check": true,
+  "status": "queued",
+  "addedBy": "agent",
+  "createdAt": "2026-11-07T13:23:00Z"
+}

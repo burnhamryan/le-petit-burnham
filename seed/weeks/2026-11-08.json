@@ -1,0 +1,70 @@
+{
+  "start": "2026-11-08",
+  "status": "awaiting_approval",
+  "approvals": {},
+  "draftedAt": "2026-11-07T13:23:00Z",
+  "draftedBy": "agent",
+  "source": "Saturday dinner run, 7 Nov 2026",
+  "nights": [
+    {
+      "date": "2026-11-08",
+      "dish": "Lemon-Pepper Chicken Thighs",
+      "desc": "Air-fried thighs with a bright lemon-pepper crust, Instant Pot rice and snappy green beans.",
+      "protein": "Chicken thighs (5)",
+      "mins": 20,
+      "heat": "Chili flakes on the side",
+      "eightySixed": false,
+      "cooked": null
+    },
+    {
+      "date": "2026-11-09",
+      "dish": "Beef Lo Mein",
+      "desc": "Saucy noodles with browned beef, broccoli and carrots. Slurping encouraged.",
+      "protein": "Ground beef",
+      "mins": 20,
+      "heat": "Chili crisp on the side",
+      "eightySixed": false,
+      "cooked": null
+    },
+    {
+      "date": "2026-11-10",
+      "dish": "Air-Fryer Cod",
+      "desc": "Flaky cod and roasted zucchini from the air fryer, warm pita on the side for wiping the plate.",
+      "protein": "Cod",
+      "mins": 20,
+      "heat": "Hot sauce on the side",
+      "eightySixed": false,
+      "cooked": null
+    },
+    {
+      "date": "2026-11-11",
+      "dish": "Sweet & Sour Pork",
+      "desc": "Ground pork, bell peppers and pineapple in a glossy sweet and sour sauce over rice.",
+      "protein": "Ground pork",
+      "mins": 20,
+      "heat": "Sriracha on the side",
+      "eightySixed": false,
+      "cooked": null
+    },
+    {
+      "date": "2026-11-12",
+      "dish": "Beef Pita Pizzas",
+      "desc": "Pita crusts, pizza sauce, beef, peppers and melty mozzarella. Everyone builds their own.",
+      "protein": "Ground beef",
+      "mins": 15,
+      "heat": "Chili flakes on the side",
+      "eightySixed": false,
+      "cooked": null
+    },
+    {
+      "date": "2026-11-13",
+      "dish": "Chicken Fajita Pitas",
+      "desc": "Sizzling thighs with peppers and onion tucked into pita pockets to close out the week.",
+      "protein": "Chicken thighs (5)",
+      "mins": 20,
+      "heat": "Hot sauce on the side",
+      "eightySixed": false,
+      "cooked": null
+    }
+  ]
+}

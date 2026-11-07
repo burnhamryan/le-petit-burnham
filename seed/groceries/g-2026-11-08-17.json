@@ -1,0 +1,13 @@
+{
+  "name": "Pita, 2 packs",
+  "sec": "Bread",
+  "store": "Walmart",
+  "forDish": "Cod, pita pizzas, fajitas",
+  "kind": "plan",
+  "week": "2026-11-08",
+  "night": "2026-11-12",
+  "check": false,
+  "status": "queued",
+  "addedBy": "agent",
+  "createdAt": "2026-11-07T13:23:00Z"
+}

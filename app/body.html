@@ -1,0 +1,109 @@
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<main class="board">
+  <header class="mast">
+    <span class="eyebrow">Est. 2026 &middot; Table for four</span>
+    <h1 class="chalk">Le Petit Burnham</h1>
+    <span class="sub chalk" id="week-label">Plats du jour</span>
+    <svg class="flourish" viewBox="0 0 220 18" aria-hidden="true"><path d="M4 9 C40 2, 70 16, 110 9 S180 2, 216 9" fill="none" stroke="#ece8dc" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/><circle cx="110" cy="9" r="3" fill="#f2d67c"/></svg>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <a class="tab" href="#menu" data-view="menu">La Carte</a>
+    <a class="tab" href="#market" data-view="market">Le Marché</a>
+  </nav>
+  <div class="week-switch" id="week-switch" hidden></div>
+  <p class="loading" id="loading">Wiping the chalkboard...</p>
+  <p class="notice" id="notice" hidden></p>
+
+  <!-- ================= MENU ================= -->
+  <section id="view-menu">
+    <div class="approve" id="approve" hidden>
+      <div class="approve-top">
+        <span class="status-pill" id="status">Awaiting approval</span>
+        <div class="stamps" id="stamps"></div>
+      </div>
+      <p id="approve-text"></p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Les Plats</h2><span class="hand">hands-on minutes where the prices go</span></div>
+      <ol class="nights" id="nights"></ol>
+      <div class="empty" id="nights-empty" hidden>
+        <p class="big">The board is blank this week.</p>
+        <p>The kitchen manager chalks up next week's menu on Friday morning. Wishes you add below are guaranteed a night within two weeks.</p>
+      </div>
+    </div>
+
+    <div class="sec" id="night-off-sec" hidden>
+      <div class="night-off">
+        <span class="date"><span class="dow" id="sat-label">Samedi</span></span>
+        <span class="dish chalk">Chef's night off</span>
+        <p class="desc">Pizza, takeout, or cereal for dinner. No judgment here.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Les Envies</h2><span class="hand">wish for it, and it's on the board within two weeks</span></div>
+      <form class="field" id="wish-form">
+        <label for="wish-input">A dish you'd like soon</label>
+        <input type="text" id="wish-input" placeholder="I'd like to have this dish soon..." autocomplete="off" maxlength="120">
+        <button class="btn solid" type="submit">Wish it</button>
+      </form>
+      <ul class="lines" id="wishes"></ul>
+      <p class="recent" id="recent" hidden></p>
+    </div>
+  </section>
+
+  <!-- ================= MARKET ================= -->
+  <section id="view-market" hidden>
+    <div class="sync" id="sync"></div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Snacks &amp; Specials</h2><span class="hand">goes to Reminders on the next run, no approval needed</span></div>
+      <form class="field" id="quick-form">
+        <label for="quick-input">Add a snack or special item</label>
+        <input type="text" id="quick-input" placeholder="Goldfish, birthday candles, the good chocolate..." autocomplete="off" maxlength="120">
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+      <ul class="lines" id="specials"></ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">This Week's Shop</h2><span class="hand" id="shop-note"></span></div>
+      <div class="shop-groups" id="shop"></div>
+      <p class="src" id="shop-empty" hidden>Nothing on this week's list yet. It fills in when the menu is drafted.</p>
+      <form class="field add-row" id="shop-form">
+        <label for="shop-input">Add to this week's shop</label>
+        <input type="text" id="shop-input" placeholder="Add to this week's shop..." autocomplete="off" maxlength="120">
+        <label for="shop-sec">Section</label>
+        <select id="shop-sec"></select>
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Le Garde-Manger</h2><span class="hand">what's in the house, tap or edit to correct</span></div>
+      <div class="pantry" id="pantry"></div>
+      <form class="field add-row" id="pantry-form">
+        <label for="pantry-input">Something we have</label>
+        <input type="text" id="pantry-input" placeholder="Something we have..." autocomplete="off" maxlength="120">
+        <label for="pantry-loc">Where</label>
+        <select id="pantry-loc"></select>
+        <button class="btn solid" type="submit">Add</button>
+      </form>
+    </div>
+
+    <div class="sec">
+      <div class="sec-head"><h2 class="chalk">Receipts</h2><span class="hand">snap it, the kitchen manager reads it next morning</span></div>
+      <label class="drop" for="receipt" id="drop">
+        <input type="file" id="receipt" accept="image/*,application/pdf">
+        <span class="big" id="drop-text">Add a Costco or Walmart receipt photo</span>
+        <small>Food lines go into the pantry and get checked off this week's shop.</small>
+      </label>
+      <ul class="lines" id="receipts"></ul>
+    </div>
+  </section>
+
+  <p class="foot">Merci, et bon appétit.</p>
+</main>

@@ -1,0 +1,13 @@
+{
+  "name": "Soy sauce",
+  "sec": "Pantry",
+  "store": "Walmart",
+  "forDish": "Lo mein, sweet & sour",
+  "kind": "plan",
+  "week": "2026-11-08",
+  "night": "2026-11-09",
+  "check": true,
+  "status": "queued",
+  "addedBy": "agent",
+  "createdAt": "2026-11-07T13:23:00Z"
+}
