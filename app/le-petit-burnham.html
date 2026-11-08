@@ -714,7 +714,7 @@ Reply with only a JSON array of exactly 3 objects:
 async function takeSwap(i, j) {
   const w = currentWeek(); const o = S.swap[i]?.options?.[j]; if (!w || !o) return;
   const nights = structuredClone(w.nights || []); const old = nights[i];
-  nights[i] = { ...old, dish: String(o.dish), desc: String(o.desc || ""), protein: String(o.protein || ""), mins: Number(o.mins) || 20, heat: String(o.heat || ""), swappedFrom: old.dish, edited: true, editedBy: S.me.id, editedAt: nowIso(), wish: null };
+  nights[i] = { ...old, dish: String(o.dish), desc: String(o.desc || ""), protein: String(o.protein || ""), mins: Number(o.mins) || 20, heat: String(o.heat || ""), swappedFrom: old.dish, eightySixed: false, edited: true, editedBy: S.me.id, editedAt: nowIso(), wish: null };
   const ok = await write(() => S.db.doc(`weeks/${w.id}`).update({ nights }), `${o.dish} is on the board`);
   if (!ok) return;
   S.swap[i] = { open: false };
