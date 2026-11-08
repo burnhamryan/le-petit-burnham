@@ -1,24 +1,29 @@
 #!/bin/zsh
-# One kitchen manager run. launchd calls this daily; you can also run it by hand.
+# Mac half of the kitchen manager. launchd runs this daily (installed by install-daily.sh).
+# No AI here: it pulls the cloud's to-do list (bridge/outbox.json), applies it to
+# Reminders and Calendar, and pushes back what happened (bridge/inbox.json).
+# The cloud half runs as a scheduled Claude task each morning before this.
 set -u
 REPO="${0:A:h:h}"
 LOG="$HOME/Library/Logs/le-petit-burnham.log"
-CLAUDE_BIN="${CLAUDE_BIN:-$(command -v claude)}"
-MODEL="${LPB_MODEL:-claude-sonnet-5-5}"
+STATE="$HOME/.le-petit-burnham/state.json"
+mkdir -p "${STATE:h}"
 
 cd "$REPO" || exit 1
-echo "=== $(date '+%Y-%m-%d %H:%M:%S') run start ===" >> "$LOG"
-git pull -q --ff-only >> "$LOG" 2>&1 || echo "git pull failed, using local copy" >> "$LOG"
+echo "=== $(date '+%Y-%m-%d %H:%M:%S') Mac sync start ===" >> "$LOG"
+git pull -q --rebase --autostash >> "$LOG" 2>&1 || echo "git pull failed, using local copy" >> "$LOG"
 
-# The prompt is everything in AGENT_PROMPT.md after the first '---' line.
-PROMPT="$(awk 'f; /^---$/ && !f {f=1}' AGENT_PROMPT.md)"
+if [[ ! -f bridge/outbox.json ]]; then
+  echo "No bridge/outbox.json yet; reporting Reminders state only." >> "$LOG"
+fi
 
-"$CLAUDE_BIN" -p "$PROMPT
+osascript -l JavaScript scripts/apple-sync.js "$REPO/bridge/outbox.json" "$REPO/bridge/inbox.json" "$STATE" >> "$LOG" 2>&1
+echo "osascript exit $?" >> "$LOG"
 
-Today is $(date '+%A %Y-%m-%d'), local time $(date '+%H:%M').
-First, load your tools: call ToolSearch with query \"select:ArtifactData,Artifact\". If either one still is not available after that, stop and say exactly which tool is missing and what ToolSearch returned. Then do today's run." \
-  --model "$MODEL" \
-  --allowedTools "ToolSearch" "Bash(osascript:*)" "Bash(date:*)" "ArtifactData" "Artifact" "Read" \
-    "mcp__Baalda__read_note" "mcp__Baalda__edit_note" "mcp__Baalda__list_notes" "mcp__Baalda__list_vaults" \
-  >> "$LOG" 2>&1
-echo "=== $(date '+%H:%M:%S') run end (exit $?) ===" >> "$LOG"
+git add bridge/inbox.json >> "$LOG" 2>&1
+if ! git diff --cached --quiet; then
+  git commit -q -m "Mac sync $(date '+%Y-%m-%d %H:%M')" >> "$LOG" 2>&1
+  git pull -q --rebase >> "$LOG" 2>&1
+  git push -q >> "$LOG" 2>&1 && echo "Pushed inbox to GitHub" >> "$LOG" || echo "git push FAILED" >> "$LOG"
+fi
+echo "=== $(date '+%H:%M:%S') Mac sync end ===" >> "$LOG"

@@ -1,13 +1,17 @@
 # How Le Petit Burnham fits together
 
 ```
- Ryan's phone ─┐                         ┌─► Apple Reminders  "Groceries" (shared)
-               ├─► Shared artifact  ◄────┤
- Diana's phone ┘   (menu + market,       └─► Apple Calendar   "Family"
-                    shared database)  ▲
-                                      │ reads and writes daily
-                         Claude Code on Ryan's Mac (scheduled)
+ Ryan's phone ─┐                        6:43  cloud kitchen manager (Claude, scheduled)
+               ├─► Shared artifact ◄──────►  reads/writes the database, drafts, pantry
+ Diana's phone ┘   (menu + database)            │ writes bridge/outbox.json (GitHub)
+                                                ▼
+                                       7:07  Mac script (launchd, no AI)
+                                             applies outbox to Reminders "Groceries"
+                                             and Calendar "Family", writes
+                                             bridge/inbox.json (what got checked off)
 ```
+
+Why two halves: the artifact database tool exists only in cloud Claude sessions, and Reminders and Calendar exist only on the Mac. Found on 8 November 2026 when the all-in-one Mac run could not reach the database.
 
 ## Who does what
 | Piece | Does | Never does |
