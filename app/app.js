@@ -338,7 +338,7 @@ async function takeSwap(i, j) {
   if (!ok) return;
   S.swap[i] = { open: false };
   // Retire the old dish's unsent, unedited grocery rows, then add what the new dish needs.
-  for (const g of S.groceries.filter(g => g.kind === "plan" && g.week === w.id && g.night === old.date && g.status === "queued" && !g.edited)) {
+  for (const g of S.groceries.filter(g => g.kind === "plan" && g.week === w.id && g.night === old.date && g.status === "queued" && !g.edited && !String(g.forDish || "").includes(","))) {
     await write(() => S.db.doc(`groceries/${g.id}`).update({ status: "removed", removedBy: "chef", removedAt: nowIso() }));
   }
   for (const b of (Array.isArray(o.buy) ? o.buy : []).slice(0, 8)) {
