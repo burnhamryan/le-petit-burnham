@@ -27,7 +27,7 @@
 - [ ] **Share it with Diana as an Editor** from the page's Share menu, so her taps, swaps and signature save.
 - [ ] **Claude Code on the Mac**, signed in to the same claude.ai account that owns the artifact, so it can use the ArtifactData tool.
 - [ ] **macOS permissions:** the first `osascript` run asks to let the terminal control Reminders and Calendar. Allow both (System Settings, Privacy and Security, Automation).
-- [ ] **Schedule the daily run** (for example 7:00 am) with the prompt in `AGENT_PROMPT.md`: Claude Code's scheduled tasks in the desktop app, or launchd running `claude -p` with `osascript` allowed.
+- [ ] **Schedule the daily run:** `zsh scripts/install-daily.sh` on the Mac installs a launchd job (7:07 daily, logs in `~/Library/Logs/le-petit-burnham.log`). It checks Reminders and Calendar access first.
 - [ ] **Retire the old Saturday dinner run** (08:23 Saturdays, rules in the vault's `Resources/operator/dinner-plan`) once the daily run has worked for a week, so two runs are not drafting menus.
 - [ ] **Seed the pantry for real:** one Costco receipt photo plus a few taps.
 
