@@ -15,9 +15,10 @@ PROMPT="$(awk 'f; /^---$/ && !f {f=1}' AGENT_PROMPT.md)"
 
 "$CLAUDE_BIN" -p "$PROMPT
 
-Today is $(date '+%A %Y-%m-%d'), local time $(date '+%H:%M'). Do today's run now." \
+Today is $(date '+%A %Y-%m-%d'), local time $(date '+%H:%M').
+First, load your tools: call ToolSearch with query \"select:ArtifactData,Artifact\". If either one still is not available after that, stop and say exactly which tool is missing and what ToolSearch returned. Then do today's run." \
   --model "$MODEL" \
-  --allowedTools "Bash(osascript:*)" "Bash(date:*)" "ArtifactData" "Artifact" "Read" \
+  --allowedTools "ToolSearch" "Bash(osascript:*)" "Bash(date:*)" "ArtifactData" "Artifact" "Read" \
     "mcp__Baalda__read_note" "mcp__Baalda__edit_note" "mcp__Baalda__list_notes" "mcp__Baalda__list_vaults" \
   >> "$LOG" 2>&1
 echo "=== $(date '+%H:%M:%S') run end (exit $?) ===" >> "$LOG"
