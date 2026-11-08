@@ -1,6 +1,6 @@
 # Le Petit Burnham
 
-The Burnham household's dinner and grocery system. Ryan and Diana see a bistro chalkboard menu for the week, swap or edit dishes, wish for dishes, approve the week, and keep a running pantry. A daily kitchen-manager run on Ryan's Mac drafts menus and keeps the shared **Groceries** list in Apple Reminders and the **Family** calendar in step.
+The Burnham household's dinner and grocery system. Ryan and Diana see a bistro chalkboard menu for the week, swap or edit dishes, wish for dishes, approve the week, and keep a running pantry. A daily Cowork scheduled task on Ryan's Mac drafts menus and keeps the shared **Groceries** list in Apple Reminders and the **Family** calendar in step.
 
 - **Live page:** https://claude.ai/artifact/4NPHBVY8jexT97z2BBPFPX (private; share it with Diana as an Editor)
 - **Agent prompt:** [AGENT_PROMPT.md](AGENT_PROMPT.md)
